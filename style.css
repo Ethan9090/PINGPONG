@@ -1,6 +1,7 @@
 .feet{
     bottom: 0px;
-    position: sticky;
+    position: fixed;
     background-color: aqua;
     border-top: aquamarine solid 10px;
+    width: 100%;
 }
