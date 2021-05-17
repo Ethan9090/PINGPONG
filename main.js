@@ -24,6 +24,22 @@ var ball = {
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent("canvas");
+
+  camera = createCapture(VIDEO);
+  camera.size(1250,500);
+
+  modEl = ml5.poseNet(camera,modelLoaded);
+
+  modEl.on("pose",gotposes);
+
+}
+
+function modelLoaded(){
+
+}
+
+function gotposes(){
+  
 }
 
 
