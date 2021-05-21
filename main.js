@@ -1,4 +1,10 @@
 
+X = "";
+
+Y = "";
+
+confidence = "";
+
 /*created by prashant shukla */
 
 var paddle2 =10,paddle1=10;
@@ -30,20 +36,44 @@ function setup(){
 
   modEl = ml5.poseNet(camera,modelLoaded);
 
-  modEl.on("pose",gotposes);
+  modEl.on("pose",gotPoses);
 
 }
 
 function modelLoaded(){
-
+console.log("modelLoaded")
 }
 
-function gotposes(){
-  
+function gotPoses(results,error){
+
+	if(results.length > 0){
+
+		console.log(results);
+
+		X = results[0].pose.rightWrist.x;
+
+		Y = results[0].pose.rightWrist.y;
+    
+		confidence = results[0].pose.rightWrist.confidence;
+
+	}
+	else{
+		console.error();
+	}
 }
+
+
 
 
 function draw(){
+
+  if(confidence > 0.2){
+    console.log(X);
+    console.log(Y);
+    circle(X,Y,100);
+    fill("red");
+    console.log("circle");
+  }
 
  background(0); 
 
