@@ -1,7 +1,7 @@
 
-X = "";
+myX = "";
 
-Y = "";
+myY = "";
 
 confidence = "";
 
@@ -32,7 +32,8 @@ function setup(){
   canvas.parent("canvas");
 
   camera = createCapture(VIDEO);
-  camera.size(1250,500);
+  camera.size(700,600);
+  camera.hide()
 
   modEl = ml5.poseNet(camera,modelLoaded);
 
@@ -50,11 +51,11 @@ function gotPoses(results,error){
 
 		console.log(results);
 
-		X = results[0].pose.rightWrist.x;
+		myX = results[0].pose.rightWrist.x;
 
-		Y = results[0].pose.rightWrist.y;
+		myY = results[0].pose.rightWrist.y;
     
-		confidence = results[0].pose.rightWrist.confidence;
+		confidence = results[0].pose.keypoints[10].score;
 
 	}
 	else{
@@ -68,14 +69,19 @@ function gotPoses(results,error){
 function draw(){
 
   if(confidence > 0.2){
-    console.log(X);
-    console.log(Y);
-    circle(X,Y,100);
-    fill("red");
+    console.log(myX);
+    console.log(myY);
+
+    fill("white");
+
+    circle(myX,myY,50);
+
     console.log("circle");
   }
 
- background(0); 
+ background(0);
+
+ image(camera,0,0);
 
  fill("black");
  stroke("black");
